@@ -1,0 +1,23 @@
+{
+  "name": "file-parser-service",
+  "version": "1.0.0",
+  "description": "NodeJS Excel File parser to mongodb",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "nodemon ./server.js"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "pino": "^5.16.0",
+    "node-cron": "^2.0.3",
+    "mongodb": "^3.5.0",
+    "rootpath": "^0.1.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  }
+}
