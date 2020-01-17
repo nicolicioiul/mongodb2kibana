@@ -1,0 +1,42 @@
+version: '3.7'
+
+services:
+  file-parser-service:
+    build: app/file-parser-service
+    container_name: file-parser-service
+    volumes:
+      - ./var/:/usr/src/app/var/
+    environment:
+      SERVER_PORT: "8080"
+      NODE_ENV: "prod"
+      LOG_LEVEL: "debug"
+      DB_HOST: "mongodb"
+      DB_NAME: "db_name"
+      DB_USERNAME: "pastime"
+      DB_PASSWORD: "pastime123"
+      DB_COLLECTION: "incidents"
+
+    networks:
+      - esnet
+    depends_on:
+      - mongodb
+
+  mongodb:
+    build: etc/db/docker/
+    container_name: mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: pass-123
+      MONGO_INITDB_DATABASE: db_name
+    volumes:
+      - ./etc/db/docker/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo-js:ro
+      - ./var/data/db:/data/db
+    networks:
+      - esnet
+
+volumes:
+  es.data:
+    driver: local
+
+networks:
+  esnet:
